@@ -1,6 +1,4 @@
-const db = require('./server/db');
-const Campus = require('./server/db/models/campus');
-const Student = require('./server/db/models/student');
+const { db, Campus, Student } = require('./server/db/models');
 
 
 const campuses = [{
@@ -34,43 +32,51 @@ const students = [{
     firstName: "Alex",
     lastName: "Cartmell",
     email: "alex@cartmell.com",
-    gpa: 2.5
+    gpa: 2.5,
+    campusId: 5
     }, {    
     firstName: "Diana",
     lastName: "Aberizk",
     email: "diana@aberizk.com",
-    gpa: 3.0
+    gpa: 3.0,
+    campusId: 6
     }, {    
     firstName: "Tony",
     lastName: "Hall",
     email: "tony@hall.com",
-    gpa: 3.5
+    gpa: 3.5,
+    campusId: 2
     }, {   
     firstName: "Jasmine",
     lastName: "Gil",
     email: "jasmine@gil.com",
-    gpa: 4.0
+    gpa: 4.0,
+    campusId: 1
     }, {     
     firstName: "Libby",
     lastName: "Anderson",
     email: "libby@anderson.com",
-    gpa: 1.5
+    gpa: 1.5,
+    campusId: 4
     }, {
     firstName: "Zara",
     lastName: "Layman",
     email: "zara@layman.com",
-    gpa: 1.0
+    gpa: 1.0,
+    campusId: 5
     }, {     
     firstName: "Nick",
     lastName: "Viglione",
     email: "nick@viglione.com",
-    gpa: 2.0
+    gpa: 2.0,
+    campusId: 1
 
     }, {    
     firstName: "Charlie",
     lastName: "Dickey",
     email: "charlie@dickey.com",
-    gpa: 0.5
+    gpa: 0.5,
+    campusId: 2
     }
 ];
 

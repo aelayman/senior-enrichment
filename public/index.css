@@ -18,6 +18,10 @@ header {
     
     
 }
+
+main {
+    padding-top: 100px;
+}
 a {
     color: white;
     text-decoration: none;
@@ -38,7 +42,7 @@ a:hover {
     height: 1.5em;
     margin: 0 1.5em 0 0;
     /* padding: 5px; */
-    font-family: Helvetica;
+    font-family: Helvetica, sans-serif;
 }
 
 #nav-links li {
@@ -52,7 +56,6 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding-top: 100px;
 }
 
 img {
@@ -84,3 +87,5 @@ img {
 .campus-profile:hover {
     background-color: rgb(0, 123, 255);
 }
+
+

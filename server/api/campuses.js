@@ -1,7 +1,7 @@
 'use strict';
 
 const campusRouter = require('express').Router();
-const { Campus } = require('../db/models'); // might need more models later
+const { Campus, Student } = require('../db/models'); // might need more models later
 
 campusRouter.get('/', (req, res, next) =>  {
     //res.json({hello: 'YOU'}));
@@ -16,6 +16,10 @@ campusRouter.get('/:campusId', (req, res, next) => {
     Campus.findOne({
         where: {
             id: req.params.campusId
+        },
+        include: {
+            model: Student,
+            as: "students"
         }
     })
     .then(campus => {

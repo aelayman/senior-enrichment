@@ -1,11 +1,17 @@
 'use strict';
 
 const studentRouter = require('express').Router();
-const { Student } = require('../db/models'); // might need more models later
+const { Student, Campus } = require('../db/models'); // might need more models later
 
 
 studentRouter.get('/', (req, res, next) => {
-    Student.findAll()
+    Student.findAll({
+        order: [['id', 'ASC']],
+        include: {
+            model: Campus,
+            as: "campus"
+         }
+    })
     .then(students => {
         res.json(students);
     }) 

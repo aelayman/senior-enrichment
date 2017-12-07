@@ -3,15 +3,20 @@ import { Route, Switch } from "react-router-dom";
 import NavBar from './NavBar';
 import Campuses from './Campuses';
 import Students from './Students';
-import store, { fetchCampuses } from '../store';
+import SingleCampus from './SingleCampus';
+
+import store, { fetchCampuses, fetchStudents } from '../store';
 //import { connect } from "react-redux";
 
 export default class UserInterface extends Component {
 
   componentDidMount () {
+    //these two don't need params so they can request right away
     const campusesThunk = fetchCampuses();
+    const studentsThunk = fetchStudents();
 
     store.dispatch(campusesThunk);
+    store.dispatch(studentsThunk);
   }
 
   render() {
@@ -22,13 +27,15 @@ export default class UserInterface extends Component {
         <main>
           <Switch>
             <Route exact path="/" component={Campuses} />
-            <Route path="/campuses" component={Campuses} />
+            <Route exact path="/campuses" component={Campuses} />
             <Route path="/students" component={Students} />
+            <Route path="/campuses/:campusId" component={SingleCampus} />
           </Switch>
         </main>
       </div>
     );
   }
 }
+
 
 
