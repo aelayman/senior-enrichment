@@ -30,6 +30,7 @@ export default class UserInterface extends Component {
             <Route exact path="/campuses" component={Campuses} />
             <Route path="/students" component={Students} />
             <Route path="/campuses/:campusId" component={SingleCampus} />
+            
           </Switch>
         </main>
       </div>

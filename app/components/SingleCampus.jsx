@@ -10,7 +10,6 @@ class SingleCampus extends Component {
 
     // if props.campus is empty (we dont have data), therefore I want to dispatch my thunk to get the data
 
-    //console.log("YOOO", props.campusData);
 
     componentDidMount() {
         const campusThunk = fetchCampus(this.props.match.params.campusId);
@@ -20,7 +19,6 @@ class SingleCampus extends Component {
 
     render() {
 
-        console.log("my array of students", this.props.campusData.students);
         return (
             <div>
                 <h2>{this.props.campusData.name}</h2>
@@ -74,7 +72,6 @@ const mapStateToProps = (state, ownProps) => {
 // const mapStateToProps = (state, ownProps) => {
 //     const campusId = Number(ownProps.match.params.campusId);
 
-//     console.log("are these the campuses?", state);
 
 
 //     return {

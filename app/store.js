@@ -13,7 +13,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const initialState = {
     campuses: [],
     students: [],
-    currentCampus: {}
+    currentCampus: {students: []},
+    currentStudent: {campuses: []}
 };
 
 
@@ -22,7 +23,7 @@ const initialState = {
 const GET_CAMPUSES = "GET_CAMPUSES";
 const GET_STUDENTS = "GET_STUDENTS";
 const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
-
+const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
 
 // ACTION CREATORS
 
@@ -46,6 +47,14 @@ export function getSingleCampus(campus) {
     const action = {
         type: GET_SINGLE_CAMPUS,
         campus
+    };
+    return action;
+}
+
+export function getSingleStudent(student) {
+    const action = {
+        type: GET_SINGLE_STUDENT,
+        student
     };
     return action;
 }
@@ -76,7 +85,6 @@ export function fetchStudents() {
     };
 }
 
-//save this to notes! 
 export function fetchCampus(campusId) {
     return function thunk(dispatch) { //dispatches action in order to change the state
         return axios.get(`/api/campuses/${campusId}`)
@@ -87,6 +95,17 @@ export function fetchCampus(campusId) {
             });
 
     };
+}
+
+export function fetchStudent(studentId) {
+    return function thunk(dispatch) {
+        return axios.get(`/api/students/${studentId}`)
+        .then(res => res.data)
+        .then(student => {
+            const action = getSingleStudent(student);
+            dispatch(action);
+        })
+    }
 }
 
 
