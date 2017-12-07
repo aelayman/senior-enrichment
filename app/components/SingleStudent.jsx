@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudent } from "../store";
+import { Link } from "react-router-dom";
 
 class SingleStudent extends Component {
 
@@ -15,14 +16,17 @@ class SingleStudent extends Component {
     render() {
 
         const student = this.props.studentData;
-        console.log("Student Info", student);
         return (
             <div>
                 <h2>{student.name}</h2>
                 <ul>
                     <li>Email: {student.email}</li>
                     <li>GPA: {student.gpa}</li>
-                    <li>Campus: </li>
+                    <li>
+                        <Link to={`/campuses/${student.campus.id}`} >
+                            Campus: {student.campus.name}
+                        </Link>
+                    </li>
                 </ul>
 
             </div>

@@ -5,6 +5,7 @@ import Campuses from './Campuses';
 import Students from './Students';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
+import NewCampusEntry from './NewCampusEntry';
 
 import store, { fetchCampuses, fetchStudents } from '../store';
 //import { connect } from "react-redux";
@@ -32,6 +33,7 @@ export default class UserInterface extends Component {
             <Route exact path="/students" component={Students} />
             <Route path="/campuses/:campusId" component={SingleCampus} />
             <Route path="/students/:studentId" component={SingleStudent} />
+            <Route path="/new-campus" component={NewCampusEntry} />
           </Switch>
         </main>
       </div>

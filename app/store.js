@@ -14,7 +14,7 @@ const initialState = {
     campuses: [],
     students: [],
     currentCampus: {students: []},
-    currentStudent: {campuses: []}
+    currentStudent: {campus: {}}    
 };
 
 
@@ -67,7 +67,6 @@ export function fetchCampuses() {
             .then(res => res.data)
             .then(campuses => {
                 const action = getCampuses(campuses);
-                //console.log("!!!!!CAMPUSES FROM DB", campuses); //able to get campuses from DB
                 dispatch(action);
             });
     };
@@ -79,7 +78,6 @@ export function fetchStudents() {
             .then(res => res.data)
             .then(students => {
                 const action = getStudents(students);
-                // console.log("do I have students in the array?", students);
                 dispatch(action);
             });
     };

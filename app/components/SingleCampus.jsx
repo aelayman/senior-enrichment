@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampus } from "../store";
+import { Link } from "react-router-dom";
+
 
 class SingleCampus extends Component {
 
@@ -17,16 +19,20 @@ class SingleCampus extends Component {
         // if (!campus) return <div> there is no campus here</div>
         // remember to bind handlechange 
 
+
+        const campus = this.props.campusData;
         return (
             <div>
-                <h2>{this.props.campusData.name}</h2>
-                <p>{this.props.campusData.description}</p>
+                <h2>{campus.name}</h2>
+                <p>{campus.description}</p>
             <ul>
             {
-                this.props.campusData.students.map(student => {
+                campus.students.map(student => {
                     return (
                         <li key={student.id} >
-                        <span>{student.name}</span>
+                        <Link to={`/students/${student.id}`} >
+                        {student.name}
+                        </Link>
                         </li>
                     );
                 })

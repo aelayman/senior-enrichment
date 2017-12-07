@@ -14,7 +14,7 @@ studentRouter.get('/', (req, res, next) => {
     })
     .then(students => {
         res.json(students);
-    }) 
+    })
     .catch(next);
 });
 
@@ -50,7 +50,7 @@ studentRouter.put('/:studentId', (req, res, next) => {
     })
     .spread((numAffectedRows, affectedRows) => {
         res.json(affectedRows[0]);
-    }) 
+    })
     .catch(next);
 });
 
@@ -67,4 +67,5 @@ studentRouter.delete('/:studentId', (req, res, next) => {
 });
 
 
-module.exports = studentRouter; // why do i need to export this? who is using?
+module.exports = studentRouter;
+

@@ -6,21 +6,24 @@ import { Link } from "react-router-dom";
 
 const Campuses = (props) => {
     return (
-        <div id="campus-grid">
-            {
-                props.campuses.map(campus => {
-                    return (
-                        <div key={campus.id} className="campus-profile">
-                            <Link to={`/campuses/${campus.id}`} >
-                            <img src={campus.imageUrl} className="campus-image" />
-                            </Link>
-                            <h2>{campus.name}</h2>
-                        </div>
+        <div>
+            <button type="button">Add a new campus</button>
+            <div id="campus-grid">
+                {
+                    props.campuses.map(campus => {
+                        return (
+                            <div key={campus.id} className="campus-profile">
+                                <Link to={`/campuses/${campus.id}`} >
+                                    <img src={campus.imageUrl} className="campus-image" />
+                                </Link>
+                                <h2>{campus.name}</h2>
+                            </div>
 
-                    );
-                })
+                        );
+                    })
 
-            }
+                }
+            </div>
         </div>
 
     );
