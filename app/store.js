@@ -13,7 +13,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const initialState = {
     campuses: [],
     students: [],
-    //currentCampus: {}
+    currentCampus: {}
 };
 
 
@@ -21,10 +21,10 @@ const initialState = {
 
 const GET_CAMPUSES = "GET_CAMPUSES";
 const GET_STUDENTS = "GET_STUDENTS";
-const CHANGE_CAMPUS_VIEW = "CHANGE_CAMPUS_VIEW";
+const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
 
 
-// ACTION CTREATORS 
+// ACTION CREATORS
 
 export function getCampuses(campuses) {
     const action = {
@@ -42,9 +42,9 @@ export function getStudents(students) {
     return action;
 }
 
-export function changeCampusView(campus) {
+export function getSingleCampus(campus) {
     const action = {
-        type: CHANGE_CAMPUS_VIEW,
+        type: GET_SINGLE_CAMPUS,
         campus
     };
     return action;
@@ -55,39 +55,39 @@ export function changeCampusView(campus) {
 export function fetchCampuses() {
     return function thunk(dispatch) {
         return axios.get('/api/campuses')
-        .then(res => res.data)
-        .then(campuses => {
-            const action = getCampuses(campuses);
-            //console.log("!!!!!CAMPUSES FROM DB", campuses); //able to get campuses from DB
-            dispatch(action);
-        });
+            .then(res => res.data)
+            .then(campuses => {
+                const action = getCampuses(campuses);
+                //console.log("!!!!!CAMPUSES FROM DB", campuses); //able to get campuses from DB
+                dispatch(action);
+            });
     };
 }
 
 export function fetchStudents() {
     return function thunk(dispatch) {
         return axios.get('/api/students')
-        .then(res => res.data)
-        .then(students => {
-            const action = getStudents(students);
-            // console.log("do I have students in the array?", students);
-            dispatch(action);
-        });
+            .then(res => res.data)
+            .then(students => {
+                const action = getStudents(students);
+                // console.log("do I have students in the array?", students);
+                dispatch(action);
+            });
     };
 }
 
 //save this to notes! 
-// export function fetchCampus(campusId) {
-//     return function thunk(dispatch) { //dispatches action in order to change the state
-//         return axios.get(`/api/campuses/${campusId}`)
-//         .then(res => res.data)
-//         .then(campus => {
-//             const action = getSingleCampus(campus); //this is the action creator function  
-//             dispatch(action);
-//         });
+export function fetchCampus(campusId) {
+    return function thunk(dispatch) { //dispatches action in order to change the state
+        return axios.get(`/api/campuses/${campusId}`)
+            .then(res => res.data)
+            .then(campus => {
+                const action = getSingleCampus(campus); //this is the action creator function  
+                dispatch(action);
+            });
 
-//     };
-// }
+    };
+}
 
 
 // REDUCER 
@@ -99,15 +99,15 @@ function reducer(state = initialState, action) {
         case GET_CAMPUSES:
             return Object.assign({}, state, { campuses: action.campuses });
 
-            // return {
-            //     ...state,
-            //     campuses: action.campuses
-            // }; //cannot use ... syntax without babel
+        // return {
+        //     ...state,
+        //     campuses: action.campuses
+        // }; //cannot use ... syntax without babel
         case GET_STUDENTS:
             return Object.assign({}, state, { students: action.students });
 
-        case CHANGE_CAMPUS_VIEW:
-            return action.campus;
+        case GET_SINGLE_CAMPUS:
+            return Object.assign({}, state, { currentCampus: action.campus });
 
         default:
             return state;
@@ -132,9 +132,9 @@ function reducer(state = initialState, action) {
 const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(
-      thunkMiddleware,
-      loggingMiddleware
+        thunkMiddleware,
+        loggingMiddleware
     ))
-  );
-  
-  export default store;
+);
+
+export default store;
