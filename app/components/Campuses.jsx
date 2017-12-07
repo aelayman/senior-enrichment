@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 //import { withRouter } from "react-router-dom";
 
 const Campuses = (props) => {
-    console.log("!!!!PROPS campuses", props.campuses);
     return (
         <div id="campus-grid">
             {

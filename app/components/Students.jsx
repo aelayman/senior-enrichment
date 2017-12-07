@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 
 const Students = (props) => {
-    console.log("!!!! PROPS STUDENTS", props.students);
     return (
         <table>
             <tbody>

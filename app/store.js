@@ -21,7 +21,7 @@ const initialState = {
 
 const GET_CAMPUSES = "GET_CAMPUSES";
 const GET_STUDENTS = "GET_STUDENTS";
-//const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS"
+const CHANGE_CAMPUS_VIEW = "CHANGE_CAMPUS_VIEW";
 
 
 // ACTION CTREATORS 
@@ -42,13 +42,13 @@ export function getStudents(students) {
     return action;
 }
 
-// export function getSingleCampus(campus) {
-//     const action = {
-//         type: GET_SINGLE_CAMPUS,
-//         campus
-//     };
-//     return action;
-// }
+export function changeCampusView(campus) {
+    const action = {
+        type: CHANGE_CAMPUS_VIEW,
+        campus
+    };
+    return action;
+}
 
 // // THUNK CREATORS
 
@@ -106,8 +106,8 @@ function reducer(state = initialState, action) {
         case GET_STUDENTS:
             return Object.assign({}, state, { students: action.students });
 
-        // case GET_SINGLE_CAMPUS:
-        //     return Object.assign({}, state, { currentCampus: action.campus } );
+        case CHANGE_CAMPUS_VIEW:
+            return action.campus;
 
         default:
             return state;

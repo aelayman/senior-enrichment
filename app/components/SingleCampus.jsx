@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampus } from "../store";
+import { changeCampusView } from "../store";
 
 //when you click on a specific campus you want to see a list of the student names and a description of the campus and the campus title 
 
@@ -14,26 +14,63 @@ const SingleCampus = (props) => {
     //     this.props.dispatch(campusThunk);
 
     // }
-    console.log("YOOO", props.campusData);
+    //console.log("YOOO", props.campusData);
 
+
+    // props are an object with "campusData" & "students"
     return (
         <div>
-            A Single Campus
-            </div>
+        
+        this is where my campus info goes
+        </div>
     );
 };
 
+class StudentsListLoader extends Component {
+
+    componentDidMount () {
+        this.props.changeCampusView(this.props.campus.name);
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.campus.name !== this.props.campus.name) {
+          this.props.changeCampusView(nextProps.campus.name);
+        }
+      }
+
+    render () {
+        console.log("!!!!!!");
+        return (
+            <SingleCampus {...this.props} />
+        );
+      }
+
+}
+
 
 const mapStateToProps = (state, ownProps) => {
-    const campusId = Number(ownProps.match.params.channelId);
+    const campusId = Number(ownProps.match.params.campusId);
 
+    console.log("are these the campuses?", state);
+    
+    
     return {
-        campusData: state.campuses.find(campus => campus.id === campusId), //|| { name: '' },
+        campus: state.campuses,
+        //state.campuses.find(campus => campus.id === campusId) || { name: '' },
         students: state.students.filter(student => student.campusId === campusId),
         campusId
     };
 };
 
-const singleCampusContainer = connect(mapStateToProps)(SingleCampus);
+const mapDispatchToProps = function (dispatch) {
+    return {
+        changeCampusView(campus) {
+        dispatch(changeCampusView(campus));
+      }
+    };
+  };
 
-export default singleCampusContainer;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(StudentsListLoader);
