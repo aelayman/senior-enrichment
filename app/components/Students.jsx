@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Students = (props) => {
     return (
@@ -17,15 +18,12 @@ const Students = (props) => {
                                 <th>{student.id}</th>
                                 <th>{student.name}</th>
                                 <th>{student.campus.name}</th>
- 
                             </tr>
                         );
                     })
                 }
             </tbody>
         </table>
-
-
 
     );
 };
@@ -51,3 +49,7 @@ export default studentsContainer;
 //         );
 //     })
 // }
+
+// <Link to={`/students/${student.id}`} >
+// A Link
+// </Link>

@@ -104,8 +104,8 @@ export function fetchStudent(studentId) {
         .then(student => {
             const action = getSingleStudent(student);
             dispatch(action);
-        })
-    }
+        });
+    };
 }
 
 
@@ -127,6 +127,9 @@ function reducer(state = initialState, action) {
 
         case GET_SINGLE_CAMPUS:
             return Object.assign({}, state, { currentCampus: action.campus });
+        
+        case GET_SINGLE_STUDENT:
+            return Object.assign({}, state, {currentStudent: action.student});
 
         default:
             return state;

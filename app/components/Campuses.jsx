@@ -11,7 +11,9 @@ const Campuses = (props) => {
                 props.campuses.map(campus => {
                     return (
                         <div key={campus.id} className="campus-profile">
-                            <Link to={`/campuses/${campus.id}`} ><img src={campus.imageUrl} className="campus-image" /></Link>
+                            <Link to={`/campuses/${campus.id}`} >
+                            <img src={campus.imageUrl} className="campus-image" />
+                            </Link>
                             <h2>{campus.name}</h2>
                         </div>
 

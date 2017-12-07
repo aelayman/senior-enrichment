@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampus } from "../store";
 
-//when you click on a specific campus you want to see a list of the student names and a description of the campus and the campus title 
-
-
-
 class SingleCampus extends Component {
-
-    // if props.campus is empty (we dont have data), therefore I want to dispatch my thunk to get the data
 
 
     componentDidMount() {
@@ -18,6 +12,10 @@ class SingleCampus extends Component {
     }
 
     render() {
+        //const { id, campus } = this.props
+        // const campus = campuses.find(campus => +campus.id === +campus.id)
+        // if (!campus) return <div> there is no campus here</div>
+        // remember to bind handlechange 
 
         return (
             <div>
@@ -42,7 +40,7 @@ class SingleCampus extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
     campusData: state.currentCampus
-    //students: state.students
+    //id: ownProps.match.params.id
     
     };
 };
