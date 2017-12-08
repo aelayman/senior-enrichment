@@ -30,6 +30,9 @@ campusRouter.get('/:campusId', (req, res, next) => {
 });
 
 campusRouter.post('/', (req, res, next) => {
+    if (req.body.imageUrl === "") {
+        delete req.body.imageUrl; // removes key from object
+    }
     Campus.create(req.body)
     .then(newCampus => {
         res.status(201).json(newCampus);

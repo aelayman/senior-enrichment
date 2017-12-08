@@ -1,7 +1,6 @@
 header {
     display: flex;
     position: fixed;
-    margin: 0 4am;
     padding: 10px;
     width: calc(100vw - 8em);
     color: white;
@@ -11,10 +10,7 @@ header {
     opacity: 0.9;
     box-sizing: border-box;
     justify-content: space-between;
-    /* transform: translateY(-4em); */
-    /* justify-content: space-between; */
-    /* border-bottom: 1px solid #68459A; */
-    /* height: 75px; */
+    left: 4em;
     
     
 }
@@ -22,7 +18,7 @@ header {
 main {
     padding-top: 100px;
 }
-a {
+header a {
     color: white;
     text-decoration: none;
 }
@@ -64,21 +60,14 @@ img {
 }
 
 .campus-profile {
-    flex: 0 0 50%;
+    flex: 0 0 44%;
     transition: background-color 0.50s ease;
     box-sizing: border-box;
     display: block;
-    /* transition: background-color 0.25s ease;
-    height: 5em;
-    width: 5em;
-    margin-left: calc(50% - 2.5em);
-    padding-top: 10px; 
-    text-align: center;
-    font-size: 2em;
-    width: calc(100% - 5em);
-    margin-left: 2.5em;
-    text-align: center;
-    font-style: italic; */
+    border: 1px solid purple;
+    margin: 3%;
+    padding-top: 50px;
+    border-radius: 5px;
 }
 .campus-profile h2 {
     text-align: center;
@@ -90,4 +79,27 @@ img {
 
 th {
     color: black;
+}
+
+.campus-profile-link {
+    width: 100%;
+    height: 100%;
+}
+
+#students-table {
+    width: 68%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#students-table th {
+    border-bottom: 1px dashed grey;
+    text-align: left;
+}
+
+#students-table td {
+    padding: 5px;
 }

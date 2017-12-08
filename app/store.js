@@ -13,8 +13,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const initialState = {
     campuses: [],
     students: [],
-    currentCampus: {students: []},
-    currentStudent: {campus: {}}    
+    currentCampus: { students: [] },
+    currentStudent: { campus: {} },
 };
 
 
@@ -24,6 +24,8 @@ const GET_CAMPUSES = "GET_CAMPUSES";
 const GET_STUDENTS = "GET_STUDENTS";
 const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
 const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
+const ADD_NEW_CAMPUS = "ADD_NEW_CAMPUS";
+
 
 // ACTION CREATORS
 
@@ -59,6 +61,14 @@ export function getSingleStudent(student) {
     return action;
 }
 
+export function addNewCampus(campusData) {
+    const action = {
+        type: ADD_NEW_CAMPUS,
+        campusData
+    };
+    return action;
+}
+
 // // THUNK CREATORS
 
 export function fetchCampuses() {
@@ -82,7 +92,6 @@ export function fetchStudents() {
             });
     };
 }
-
 export function fetchCampus(campusId) {
     return function thunk(dispatch) { //dispatches action in order to change the state
         return axios.get(`/api/campuses/${campusId}`)
@@ -95,14 +104,28 @@ export function fetchCampus(campusId) {
     };
 }
 
+export function postCampus(campus, history) {
+    return function thunk(dispatch) {
+        return axios.post('/api/campuses', campus)
+            .then(res => res.data)
+            .then(newCampus => {
+                const action = addNewCampus(newCampus);
+                dispatch(action);
+                //once the new channel has been created, we can dynamically navigate on the front end. 
+                history.push(`/campuses/${newCampus.id}`);
+            });
+    };
+}
+
+
 export function fetchStudent(studentId) {
     return function thunk(dispatch) {
         return axios.get(`/api/students/${studentId}`)
-        .then(res => res.data)
-        .then(student => {
-            const action = getSingleStudent(student);
-            dispatch(action);
-        });
+            .then(res => res.data)
+            .then(student => {
+                const action = getSingleStudent(student);
+                dispatch(action);
+            });
     };
 }
 
@@ -125,9 +148,13 @@ function reducer(state = initialState, action) {
 
         case GET_SINGLE_CAMPUS:
             return Object.assign({}, state, { currentCampus: action.campus });
-        
+
         case GET_SINGLE_STUDENT:
-            return Object.assign({}, state, {currentStudent: action.student});
+            return Object.assign({}, state, { currentStudent: action.student });
+
+        case ADD_NEW_CAMPUS:
+            var newCampus = [...state.campuses, action.campusData];
+            return Object.assign({}, state, { campuses: newCampus });
 
         default:
             return state;

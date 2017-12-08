@@ -13,11 +13,12 @@ const Campus = db.define('campus', {
     },
     imageUrl: {
         type: Sequelize.STRING,
+        allowNull: false,
         // set default value to be a default image
         defaultValue: 'https://i.imgur.com/AxH69n9.jpg'
     },
     description: {
-        type: Sequelize.TEXT 
+        type: Sequelize.TEXT
     }
 
 });

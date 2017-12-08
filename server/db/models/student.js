@@ -12,14 +12,14 @@ const Student = db.define('student', {
             notEmpty: true
         }
 
-    }, 
+    },
     lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
             notEmpty: true
         }
-    }, 
+    },
     email: {
         type: Sequelize.STRING, 
         allowNull: false,

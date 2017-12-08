@@ -4,20 +4,26 @@ import { Link } from "react-router-dom";
 
 const Students = (props) => {
     return (
-        <table>
+        <table id="students-table">
             <tbody>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Campus</th>
+                    <th />
                 </tr>
                 {
                     props.students.map(student => {
                         return (
                             <tr key={student.id}>
-                                <th>{student.id}</th>
-                                <th>{student.name}</th>
-                                <th>{student.campus.name}</th>
+                                <td>{student.id}</td>
+                                <td>
+                                    <Link to={`/students/${student.id}`}>
+                                        {student.name}
+                                    </Link>
+                                </td>
+                                <td>{student.campus.name}</td>
+                                <td><button>X</button></td>
                             </tr>
                         );
                     })
