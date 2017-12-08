@@ -21,7 +21,7 @@ class SingleStudent extends Component {
                 <h2>{student.name}</h2>
                 <ul>
                     <li>Email: {student.email}</li>
-                    <li>GPA: {student.gpa}</li>
+                    <li>GPA: {student.gpaFormat}</li>
                     <li>
                         <Link to={`/campuses/${student.campus.id}`} >
                             Campus: {student.campus.name}

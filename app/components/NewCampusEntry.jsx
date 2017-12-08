@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { postCampus } from "../store";
 
+//need to add onchange handler???
+//warning.js:33 Warning: Failed form propType: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`. Check the render method of `NewCampusEntry`
 
 const NewCampusEntry = (props) => {
     return (
@@ -35,13 +37,14 @@ const NewCampusEntry = (props) => {
     );
 };
 
-
-// do i need to do regular function syntax here because of the binding? arrow functions change scope...
+// how am I using mapstatetoprops here??? there is nothing called newcampusentry on my initial state..
 const mapStateToProps = (state) => {
     return {
         newCampusEntry: state.newCampus
     };
 };
+
+
 
 
 // when the campus is submitted, the event is dispatched to the thunk in order to update the database and eventually state
@@ -57,6 +60,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
     };
 };
+
 
 export default connect(
     mapStateToProps,

@@ -39,8 +39,14 @@ const Student = db.define('student', {
     getterMethods: {
         name () {
             return this.getDataValue("firstName") + " " + this.getDataValue("lastName");
+        },
+        gpaFormat () {
+            if (this.getDataValue("gpa") % 1 === 0) {
+                return this.getDataValue("gpa") + ".0";
+            } else {
+                return this.getDataValue("gpa");
+            }
         }
-
     }
 });
 

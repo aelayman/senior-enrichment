@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 class SingleCampus extends Component {
 
-
+// a dumb class because it has lifecycle hooks 
     componentDidMount() {
         const campusThunk = fetchCampus(this.props.match.params.campusId);
         this.props.dispatch(campusThunk);
@@ -14,15 +14,12 @@ class SingleCampus extends Component {
     }
 
     render() {
-        //const { id, campus } = this.props
-        // const campus = campuses.find(campus => +campus.id === +campus.id)
-        // if (!campus) return <div> there is no campus here</div>
-        // remember to bind handlechange 
 
 
         const campus = this.props.campusData;
         return (
             <div>
+                <img src={campus.imageUrl} className="campus-image" />
                 <h2>{campus.name}</h2>
                 <p>{campus.description}</p>
             <ul>
@@ -43,59 +40,15 @@ class SingleCampus extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => { //do I need ownProps here?? 
     return {
     campusData: state.currentCampus
-    //id: ownProps.match.params.id
+    //id: ownProps.match.params.id???
     
     };
 };
 
-// class StudentsListLoader extends Component {
-
-//     componentDidMount () {
-//         this.props.changeCampusView(this.props.campus.name);
-//     }
-
-//     componentWillReceiveProps (nextProps) {
-//         if (nextProps.campus.name !== this.props.campus.name) {
-//           this.props.changeCampusView(nextProps.campus.name);
-//         }
-//       }
-
-//     render () {
-//         console.log("!!!!!!");
-//         return (
-//             <SingleCampus {...this.props} />
-//         );
-//       }
-
-// }
-
-
-// const mapStateToProps = (state, ownProps) => {
-//     const campusId = Number(ownProps.match.params.campusId);
-
-
-
-//     return {
-//         campus: state.campuses,
-//         //state.campuses.find(campus => campus.id === campusId) || { name: '' },
-//         students: state.students.filter(student => student.campusId === campusId),
-//         campusId
-//     };
-// };
-
-// const mapDispatchToProps = function (dispatch) {
-//     return {
-//         changeCampusView(campus) {
-//         dispatch(changeCampusView(campus));
-//       }
-//     };
-//   };
 
 const singleCampusContainer = connect(mapStateToProps)(SingleCampus);
-
-
 
 export default singleCampusContainer;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
-import NavBar from './NavBar';
-import Campuses from './Campuses';
-import Students from './Students';
-import SingleCampus from './SingleCampus';
-import SingleStudent from './SingleStudent';
-import NewCampusEntry from './NewCampusEntry';
+import NavBar from "./NavBar";
+import Campuses from "./Campuses";
+import Students from "./Students";
+import SingleCampus from "./SingleCampus";
+import SingleStudent from "./SingleStudent";
+import NewCampusEntry from "./NewCampusEntry";
+import NewStudentEntry from "./NewStudentEntry";
 
 import store, { fetchCampuses, fetchStudents } from '../store';
 //import { connect } from "react-redux";
@@ -32,6 +33,7 @@ export default class UserInterface extends Component {
             <Route exact path="/campuses" component={Campuses} />
             <Route exact path="/students" component={Students} />
             <Route exact path="/campuses/new-campus" component={NewCampusEntry} />
+            <Route exact path="/students/new-student" component={NewStudentEntry} />
             <Route path="/campuses/:campusId" component={SingleCampus} />
             <Route path="/students/:studentId" component={SingleStudent} />
 

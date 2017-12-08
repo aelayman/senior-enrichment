@@ -15,6 +15,7 @@ const initialState = {
     students: [],
     currentCampus: { students: [] },
     currentStudent: { campus: {} },
+    //error message can navigate to route who can display what error is in the store
 };
 
 
@@ -25,6 +26,7 @@ const GET_STUDENTS = "GET_STUDENTS";
 const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
 const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
 const ADD_NEW_CAMPUS = "ADD_NEW_CAMPUS";
+const ADD_NEW_STUDENT = "ADD_NEW_STUDENT";
 
 
 // ACTION CREATORS
@@ -69,6 +71,14 @@ export function addNewCampus(campusData) {
     return action;
 }
 
+export function addNewStudent(studentData) {
+    const action = {
+        type: ADD_NEW_STUDENT,
+        studentData
+    };
+    return action;
+}
+
 // // THUNK CREATORS
 
 export function fetchCampuses() {
@@ -81,6 +91,9 @@ export function fetchCampuses() {
             });
     };
 }
+
+//look at last part of juke for error handling
+// logging the error is okay. 
 
 export function fetchStudents() {
     return function thunk(dispatch) {
@@ -129,6 +142,18 @@ export function fetchStudent(studentId) {
     };
 }
 
+export function postStudent(student, history) {
+    return function thunk(dispatch) {
+        return axios.post('/api/students', student)
+        .then(res => res.data)
+        .then(newStudent => {
+            const action = addNewStudent(newStudent);
+            dispatch(action);
+            history.push(`/students/${newStudent.id}`);
+        });
+    };
+}
+
 
 // REDUCER 
 
@@ -152,10 +177,16 @@ function reducer(state = initialState, action) {
         case GET_SINGLE_STUDENT:
             return Object.assign({}, state, { currentStudent: action.student });
 
-        case ADD_NEW_CAMPUS:
-            var newCampus = [...state.campuses, action.campusData];
+        case ADD_NEW_CAMPUS: {
+            const newCampus = [...state.campuses, action.campusData];
             return Object.assign({}, state, { campuses: newCampus });
+        }
 
+        case ADD_NEW_STUDENT: {
+            const newStudent = [...state.students, action.studentData];
+            return Object.assign({}, state, { students: newStudent });
+        }
+            
         default:
             return state;
     }
