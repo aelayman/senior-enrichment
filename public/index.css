@@ -1,3 +1,6 @@
+body {
+    background-color: #FFEFD6;
+}
 
 header {
     display: flex;
@@ -21,7 +24,6 @@ a {
 }
 main {
     padding-top: 100px;
-    background-color: #FFEFD6;
 }
 header a {
     color: white;

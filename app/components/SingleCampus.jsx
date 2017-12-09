@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCampus } from "../store";
+import { fetchCampus, removeCampus } from "../store";
 import { Link } from "react-router-dom";
-//import { EditCampus } from "./EditCampus";
+
 
 
 class SingleCampus extends Component {
 
     componentDidMount() {
-        const campusThunk = fetchCampus(this.props.match.params.campusId);
-        this.props.dispatch(campusThunk);
-
+        this.props.loadCampusData();
     }
 
     render() {
@@ -37,19 +35,32 @@ class SingleCampus extends Component {
             </ul>
                 <button type="button">
                 <Link to={`/campuses/${campus.id}/edit`}>Edit</Link></button>
-            <button type="button">Delete Campus</button>
+            <button onClick={this.props.handleRemove} type="button">Delete Campus</button>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
     campusData: state.currentCampus
     };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        handleRemove(event) {
+            event.preventDefault();
+            const campusId = +ownProps.match.params.campusId;
+            dispatch(removeCampus(campusId, ownProps.history));
+        },
+        loadCampusData() {
+            const campusThunk = fetchCampus(ownProps.match.params.campusId);
+            dispatch(campusThunk);
+        }
+    };
+};
 
-const singleCampusContainer = connect(mapStateToProps)(SingleCampus);
+const singleCampusContainer = connect(mapStateToProps, mapDispatchToProps)(SingleCampus);
 
 export default singleCampusContainer;

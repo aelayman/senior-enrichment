@@ -30,7 +30,7 @@ const ADD_NEW_STUDENT = "ADD_NEW_STUDENT";
 const DELETE_STUDENT = "DELETE_STUDENT";
 const DELETE_CAMPUS = "DELETE_CAMPUS";
 const EDIT_CAMPUS = "EDIT_CAMPUS";
-
+const EDIT_STUDENT = "EDIT_STUDENT";
 
 
 // ACTION CREATORS
@@ -107,6 +107,14 @@ export function editCampus(campus) {
     return action;
 }
 
+export function editStudent(student) {
+    const action = {
+        type: EDIT_STUDENT,
+        student
+    };
+    return action;
+}
+
 // // THUNK CREATORS
 
 export function fetchCampuses() {
@@ -152,7 +160,7 @@ export function postCampus(campus, history) {
             .then(newCampus => {
                 const action = addNewCampus(newCampus);
                 dispatch(action);
-                //once the new channel has been created, we can dynamically navigate on the front end. 
+                //once the new campus has been created, we can dynamically navigate on the frontend
                 history.push(`/campuses/${newCampus.id}`);
             });
     };
@@ -183,37 +191,63 @@ export function postStudent(student, history) {
 }
 
 export function removeStudent(studentId) {
-        return function thunk(dispatch) {
-            return axios.delete(`/api/students/${studentId}`)
-                .then(() => {
-                    const action = deleteStudent(studentId);
-                    dispatch(action);
-                });
-        };
-    }
+    return function thunk(dispatch) {
+        return axios.delete(`/api/students/${studentId}`)
+            .then(() => {
+                const action = deleteStudent(studentId);
+                dispatch(action);
+            });
+    };
+}
 
-export function removeCampuses(campusId) {
+export function removeCampus(campusId, history) {
     return function thunk(dispatch) {
         return axios.delete(`/api/campuses/${campusId}`)
             .then(() => {
                 const action = deleteCampus(campusId);
                 dispatch(action);
+                history.push(`/campuses`);
             });
     };
 }
 
-export function updateCampus(campusId, history) {
+export function updateCampus(campus, history) {
     return function thunk(dispatch) {
-        return axios.put('/api/campuses/${campusId')
+        return axios.put(`/api/campuses/${campus.id}`, campus)
             .then(res => res.data)
-            .then(campus => {
-                const action = editCampus(campus);
+            .then(resCampus => {
+                const action = editCampus(resCampus);
                 dispatch(action);
+                history.push(`/campuses/${resCampus.id}`);
             });
     };
 }
 
+export function updateStudent(student, history) {
+    return function thunk(dispatch) {
+        return axios.put(`/api/students/${student.id}`, student)
+            .then(res => res.data)
+            .then(resStudent => {
+                const action = editStudent(resStudent);
+                dispatch(action);
+                history.push(`/students/${resStudent.id}`);
+            });
+    };
+}
 
+//auxiliary functions
+
+// I need to find the object I want to edit (campus or student) in the array on state and then add all the previous campuses back to the array, the edited campus, and the following campuses 
+
+//and then add that array back to the state object (do this in reducer)
+const indexOfObject = (id, array) => {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].id === id) {
+            return i;
+        }
+    }
+    return -1;
+};
 
 
 // REDUCER 
@@ -264,8 +298,18 @@ function reducer(state = initialState, action) {
         }
 
         case EDIT_CAMPUS: {
+            const campusIndex = indexOfObject(action.campus.id, state.campuses);
+            const newCampusesArray = [...state.campuses.slice(0, campusIndex), action.campus, ...state.campuses.slice(campusIndex + 1)];
             return Object.assign({}, state, {
-                campuses: campus
+                campuses: newCampusesArray
+            });
+        }
+
+        case EDIT_STUDENT: {
+            const studentIndex = indexOfObject(action.student.id, state.students);
+            const newStudentsArray = [...state.students.slice(0, studentIndex), action.student, ...state.campuses.slice(studentIndex + 1)];
+            return Object.assign({}, state, {
+                students: newStudentsArray
             });
         }
 
@@ -273,7 +317,6 @@ function reducer(state = initialState, action) {
             return state;
     }
 }
-
 
 const store = createStore(
     reducer,

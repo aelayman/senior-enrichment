@@ -1,13 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
+import SharedStudentForm from "./SharedStudentForm";
 
 const EditStudent = (props) => {
-    return (
-
-        <div>
-        This is where you edit student info
-        </div>
-    );
+    return <SharedStudentForm newStudent={false} {...props} />;
 };
 
 export default EditStudent;

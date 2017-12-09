@@ -57,10 +57,21 @@ studentRouter.put('/:studentId', (req, res, next) => {
     Student.update(req.body, {
         where: {
             id: req.params.studentId
-        }, returning: true
+        }
+    }) //now i need to get that student data including its campus
+    .then(() => {
+        return Student.findOne({
+            where: {
+                id: req.params.studentId
+            },
+            include: {
+                model: Campus,
+                as: "campus"
+            }
+        });
     })
-    .spread((numAffectedRows, affectedRows) => {
-        res.json(affectedRows[0]);
+    .then(updatedStudent => {
+        res.json(updatedStudent);
     })
     .catch(next);
 });
