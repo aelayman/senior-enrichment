@@ -12,7 +12,7 @@ const Student = require('./student');
 // This is also probably a good place for you to set up your associations
 
 Student.belongsTo(Campus);
-Campus.hasMany(Student);
+Campus.hasMany(Student, {onDelete: 'CASCADE'}); //this is how I can then also delete all the associated students
 
 module.exports = {
 	db,

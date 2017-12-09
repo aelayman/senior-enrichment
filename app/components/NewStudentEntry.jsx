@@ -32,6 +32,17 @@ const NewStudentEntry = (props) => {
                     name="studentGpa"
                     placeholder="Enter student's GPA"
                 />
+                <select name="campus">
+                    {
+                        props.campuses.map(campus => {
+                            return (
+                                <option key={campus.id} value={campus.id} > {campus.name}
+                                </option>
+                            );
+                        })
+                    }
+
+                </select>
             </div>
             <div className="form-group">
                 <button type="submit" className="btn btn-default">Create Student</button>
@@ -41,10 +52,9 @@ const NewStudentEntry = (props) => {
     );
 };
 
-
 const mapStateToProps = (state) => {
     return {
-        newStudentEntry: state.newStudent
+        campuses: state.campuses
     };
 };
 
@@ -52,7 +62,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handleSubmit(event) {
             event.preventDefault();
-            const studentData = { firstName: event.target.studentFirstName.value, lastName: event.target.studentLastName, email: event.target.studentEmail.value, imageUrl: event.target.studentGpa.value };
+            const studentData = {
+                firstName: event.target.studentFirstName.value,
+                lastName: event.target.studentLastName.value,
+                email: event.target.studentEmail.value,
+                gpa: event.target.studentGpa.value,
+                campusId: event.target.campus.value
+            };
             const history = ownProps.history;
             dispatch(postStudent(studentData, history));
         }
@@ -60,8 +76,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NewStudentEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(NewStudentEntry);
 

@@ -37,6 +37,17 @@ studentRouter.get('/:studentId', (req, res, next) => {
 studentRouter.post('/', (req, res, next) => {
     Student.create(req.body)
     .then(newStudent => {
+        return Student.findOne({
+            where: {
+                id: newStudent.id
+            },
+            include: {
+                model: Campus,
+                as: "campus"
+            }
+        });
+    })
+    .then(newStudent => {
         res.status(201).json(newStudent);
     })
     .catch(next);

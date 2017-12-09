@@ -7,9 +7,11 @@ import SingleCampus from "./SingleCampus";
 import SingleStudent from "./SingleStudent";
 import NewCampusEntry from "./NewCampusEntry";
 import NewStudentEntry from "./NewStudentEntry";
+import EditCampus from "./EditCampus";
+import EditStudent from "./EditStudent";
+
 
 import store, { fetchCampuses, fetchStudents } from '../store';
-//import { connect } from "react-redux";
 
 export default class UserInterface extends Component {
 
@@ -34,8 +36,11 @@ export default class UserInterface extends Component {
             <Route exact path="/students" component={Students} />
             <Route exact path="/campuses/new-campus" component={NewCampusEntry} />
             <Route exact path="/students/new-student" component={NewStudentEntry} />
+            <Route exact path="/campuses/:campusId/edit" component={EditCampus} />
+            <Route exact path="/students/:studentId/edit" component={EditStudent} />
             <Route path="/campuses/:campusId" component={SingleCampus} />
             <Route path="/students/:studentId" component={SingleStudent} />
+
 
           </Switch>
         </main>
@@ -43,6 +48,4 @@ export default class UserInterface extends Component {
     );
   }
 }
-
-
 

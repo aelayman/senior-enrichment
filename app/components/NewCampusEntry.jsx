@@ -23,7 +23,7 @@ const NewCampusEntry = (props) => {
                 />
                 <input
                     className="form-control"
-                    value="https://i.imgur.com/AxH69n9.jpg"
+                    defaultValue="https://i.imgur.com/AxH69n9.jpg"
                     type="text"
                     name="campusImage"
                     placeholder="Enter campus photo"
@@ -37,32 +37,27 @@ const NewCampusEntry = (props) => {
     );
 };
 
-// how am I using mapstatetoprops here??? there is nothing called newcampusentry on my initial state..
-const mapStateToProps = (state) => {
-    return {
-        newCampusEntry: state.newCampus
-    };
-};
-
-
-
 
 // when the campus is submitted, the event is dispatched to the thunk in order to update the database and eventually state
 
-//use to set some to be functions specifically functions taht will dispatch an action or a funk
+//use to set some to be functions specifically functions taht will dispatch an action or a thunk
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handleSubmit(event) {
             event.preventDefault();
-            const campusData = { name: event.target.campusName.value, description: event.target.campusDescription.value, imageUrl: event.target.campusImage.value };
+            const campusData = {
+                name: event.target.campusName.value,
+                description: event.target.campusDescription.value,
+                imageUrl: event.target.campusImage.value
+            };
             const history = ownProps.history;
             dispatch(postCampus(campusData, history));
         }
+        // handleChange(event) {
+        //     dispatch()
+        // }
     };
 };
 
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NewCampusEntry);
+export default connect(mapDispatchToProps)(NewCampusEntry);

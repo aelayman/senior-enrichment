@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampus } from "../store";
 import { Link } from "react-router-dom";
+//import { EditCampus } from "./EditCampus";
 
 
 class SingleCampus extends Component {
 
-// a dumb class because it has lifecycle hooks 
     componentDidMount() {
         const campusThunk = fetchCampus(this.props.match.params.campusId);
         this.props.dispatch(campusThunk);
@@ -35,16 +35,17 @@ class SingleCampus extends Component {
                 })
             }
             </ul>
+                <button type="button">
+                <Link to={`/campuses/${campus.id}/edit`}>Edit</Link></button>
+            <button type="button">Delete Campus</button>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => { //do I need ownProps here?? 
+const mapStateToProps = (state, ownProps) => {
     return {
     campusData: state.currentCampus
-    //id: ownProps.match.params.id???
-    
     };
 };
 

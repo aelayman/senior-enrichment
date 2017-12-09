@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 class SingleStudent extends Component {
 
-
-
     componentDidMount() {
         const studentThunk = fetchStudent(this.props.match.params.studentId);
         this.props.dispatch(studentThunk);
@@ -28,7 +26,7 @@ class SingleStudent extends Component {
                         </Link>
                     </li>
                 </ul>
-
+                <button type="button"><Link to={`/students/${student.id}/edit`}>Edit</Link></button>
             </div>
 
         );

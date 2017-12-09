@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
+//import rootReducer from './reducers';
 import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 import axios from "axios";
@@ -27,6 +27,10 @@ const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
 const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
 const ADD_NEW_CAMPUS = "ADD_NEW_CAMPUS";
 const ADD_NEW_STUDENT = "ADD_NEW_STUDENT";
+const DELETE_STUDENT = "DELETE_STUDENT";
+const DELETE_CAMPUS = "DELETE_CAMPUS";
+const EDIT_CAMPUS = "EDIT_CAMPUS";
+
 
 
 // ACTION CREATORS
@@ -75,6 +79,30 @@ export function addNewStudent(studentData) {
     const action = {
         type: ADD_NEW_STUDENT,
         studentData
+    };
+    return action;
+}
+
+export function deleteStudent(studentId) {
+    const action = {
+        type: DELETE_STUDENT,
+        studentId
+    };
+    return action;
+}
+
+export function deleteCampus(campusId) {
+    const action = {
+        type: DELETE_CAMPUS,
+        campusId
+    };
+    return action;
+}
+
+export function editCampus(campus) {
+    const action = {
+        type: EDIT_CAMPUS,
+        campus
     };
     return action;
 }
@@ -145,14 +173,47 @@ export function fetchStudent(studentId) {
 export function postStudent(student, history) {
     return function thunk(dispatch) {
         return axios.post('/api/students', student)
-        .then(res => res.data)
-        .then(newStudent => {
-            const action = addNewStudent(newStudent);
-            dispatch(action);
-            history.push(`/students/${newStudent.id}`);
-        });
+            .then(res => res.data)
+            .then(newStudent => {
+                const action = addNewStudent(newStudent);
+                dispatch(action);
+                history.push(`/students/${newStudent.id}`);
+            });
     };
 }
+
+export function removeStudent(studentId) {
+        return function thunk(dispatch) {
+            return axios.delete(`/api/students/${studentId}`)
+                .then(() => {
+                    const action = deleteStudent(studentId);
+                    dispatch(action);
+                });
+        };
+    }
+
+export function removeCampuses(campusId) {
+    return function thunk(dispatch) {
+        return axios.delete(`/api/campuses/${campusId}`)
+            .then(() => {
+                const action = deleteCampus(campusId);
+                dispatch(action);
+            });
+    };
+}
+
+export function updateCampus(campusId, history) {
+    return function thunk(dispatch) {
+        return axios.put('/api/campuses/${campusId')
+            .then(res => res.data)
+            .then(campus => {
+                const action = editCampus(campus);
+                dispatch(action);
+            });
+    };
+}
+
+
 
 
 // REDUCER 
@@ -164,10 +225,6 @@ function reducer(state = initialState, action) {
         case GET_CAMPUSES:
             return Object.assign({}, state, { campuses: action.campuses });
 
-        // return {
-        //     ...state,
-        //     campuses: action.campuses
-        // }; //cannot use ... syntax without babel
         case GET_STUDENTS:
             return Object.assign({}, state, { students: action.students });
 
@@ -186,26 +243,37 @@ function reducer(state = initialState, action) {
             const newStudent = [...state.students, action.studentData];
             return Object.assign({}, state, { students: newStudent });
         }
-            
+
+        case DELETE_STUDENT: {
+            const studentId = action.studentId;
+            const remainingStudentsArray = state.students.filter(student => {
+                return student.id !== studentId;
+            });
+            return Object.assign({}, state, { students: remainingStudentsArray });
+        }
+
+        case DELETE_CAMPUS: {
+            const campusId = action.campusId;
+            const remainingCampusesArray = state.campuses.filter(campus => {
+                return campus.id !== campusId;
+            });
+            const remainingStudentsArray = state.students.filter(student => {
+                return student.campus.id !== campusId;
+            });
+            return Object.assign({}, state, { campuses: remainingCampusesArray, students: remainingStudentsArray });
+        }
+
+        case EDIT_CAMPUS: {
+            return Object.assign({}, state, {
+                campuses: campus
+            });
+        }
+
         default:
             return state;
     }
 }
 
-
-
-
-// //1. set up action types:
-// // GET STUDENTS, GET CAMPUSES, ====> later: CREATE NEW STUDENT CREATE NEW CAMPUS 
-
-// // set up reducer 
-
-// // set up thunk 
-
-// // call thunk in user interface in componentDidMount 
-
-// //  connect campuses component to the store so that the campuses re-renders when there is a change remember to use react-redux lib
-// //this should load campuses from the server and display them. 
 
 const store = createStore(
     reducer,

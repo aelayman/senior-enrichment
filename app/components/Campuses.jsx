@@ -7,11 +7,7 @@ import { Link } from "react-router-dom";
 const Campuses = (props) => {
     return (
         <div>
-            <button type="button">
-                <Link to={"/campuses/new-campus"} >
-                    Add a new campus
-            </Link>
-            </button>
+            <h1 id="school-title">School Title</h1>
             <div id="campus-grid">
                 {
                     props.campuses.map(campus => {
@@ -31,6 +27,11 @@ const Campuses = (props) => {
 
                 }
             </div>
+            <button type="button" className="btn btn-primary float-right">
+                <Link to={"/campuses/new-campus"} >
+                    Add a new campus
+                </Link>
+            </button>
         </div>
 
     );
@@ -44,12 +45,4 @@ const mapStateToProps = (state) => {
 
 const campusesContainer = connect(mapStateToProps)(Campuses);
 
-
-
 export default campusesContainer;
-// <div className="campus-profile">
-// <a href="#">
-//     <img src="https://i.imgur.com/AxH69n9.jpg" className="campus-image" /> </a>
-
-// <h2>Boaty McBoatface</h2>
-// </div>
