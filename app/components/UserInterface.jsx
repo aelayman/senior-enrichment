@@ -9,7 +9,7 @@ import NewCampusEntry from "./NewCampusEntry";
 import NewStudentEntry from "./NewStudentEntry";
 import EditCampus from "./EditCampus";
 import EditStudent from "./EditStudent";
-
+import Home from "./Home";
 
 import store, { fetchCampuses, fetchStudents } from '../store';
 
@@ -31,7 +31,7 @@ export default class UserInterface extends Component {
         <NavBar />
         <main>
           <Switch>
-            <Route exact path="/" component={Campuses} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/campuses" component={Campuses} />
             <Route exact path="/students" component={Students} />
             <Route exact path="/campuses/new-campus" component={NewCampusEntry} />

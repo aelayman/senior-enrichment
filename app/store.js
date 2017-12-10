@@ -5,7 +5,6 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 import axios from "axios";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-//export default createStore(rootReducer, applyMiddleware(thunkMiddleware, loggingMiddleware));
 
 
 // INITIAL STATE
@@ -14,8 +13,7 @@ const initialState = {
     campuses: [],
     students: [],
     currentCampus: { students: [] },
-    currentStudent: { campus: {} },
-    //error message can navigate to route who can display what error is in the store
+    currentStudent: { campus: {} }
 };
 
 
@@ -124,12 +122,10 @@ export function fetchCampuses() {
             .then(campuses => {
                 const action = getCampuses(campuses);
                 dispatch(action);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
-
-//look at last part of juke for error handling
-// logging the error is okay. 
 
 export function fetchStudents() {
     return function thunk(dispatch) {
@@ -138,9 +134,11 @@ export function fetchStudents() {
             .then(students => {
                 const action = getStudents(students);
                 dispatch(action);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
+
 export function fetchCampus(campusId) {
     return function thunk(dispatch) { //dispatches action in order to change the state
         return axios.get(`/api/campuses/${campusId}`)
@@ -148,8 +146,8 @@ export function fetchCampus(campusId) {
             .then(campus => {
                 const action = getSingleCampus(campus); //this is the action creator function  
                 dispatch(action);
-            });
-
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -162,7 +160,8 @@ export function postCampus(campus, history) {
                 dispatch(action);
                 //once the new campus has been created, we can dynamically navigate on the frontend
                 history.push(`/campuses/${newCampus.id}`);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -174,7 +173,8 @@ export function fetchStudent(studentId) {
             .then(student => {
                 const action = getSingleStudent(student);
                 dispatch(action);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -186,7 +186,8 @@ export function postStudent(student, history) {
                 const action = addNewStudent(newStudent);
                 dispatch(action);
                 history.push(`/students/${newStudent.id}`);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -196,7 +197,8 @@ export function removeStudent(studentId) {
             .then(() => {
                 const action = deleteStudent(studentId);
                 dispatch(action);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -207,7 +209,8 @@ export function removeCampus(campusId, history) {
                 const action = deleteCampus(campusId);
                 dispatch(action);
                 history.push(`/campuses`);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 
@@ -219,9 +222,10 @@ export function updateCampus(campus, history) {
                 const action = editCampus(resCampus);
                 dispatch(action);
                 history.push(`/campuses/${resCampus.id}`);
-            });
+            })
+            .catch(error => console.log(error));
     };
-}
+}   
 
 export function updateStudent(student, history) {
     return function thunk(dispatch) {
@@ -231,7 +235,8 @@ export function updateStudent(student, history) {
                 const action = editStudent(resStudent);
                 dispatch(action);
                 history.push(`/students/${resStudent.id}`);
-            });
+            })
+            .catch(error => console.log(error));
     };
 }
 

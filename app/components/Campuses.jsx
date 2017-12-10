@@ -1,13 +1,11 @@
 import React from 'react';
-// import store from '../store';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-//import { withRouter } from "react-router-dom";
 
 const Campuses = (props) => {
     return (
         <div>
-            <h1 id="school-title">School Title</h1>
+            <h1 className="school-title">JavaShip BoatCamp</h1>
             <div id="campus-grid">
                 {
                     props.campuses.map(campus => {
@@ -15,8 +13,10 @@ const Campuses = (props) => {
                             <div key={campus.id} className="campus-profile">
                                 <Link to={`/campuses/${campus.id}`} >
                                     <div className="campus-profile-link">
-                                        <img src={campus.imageUrl} className="campus-image" />
-                                        <h2>{campus.name}</h2>
+                                        <div className="campus-image-container">
+                                            <img src={campus.imageUrl} className="campus-image" />
+                                        </div>
+                                        <h2 className="campus-name">{campus.name}</h2>
                                     </div>
                                 </Link>
 

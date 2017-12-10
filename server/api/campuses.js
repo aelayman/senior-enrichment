@@ -1,8 +1,7 @@
 'use strict';
 
 const campusRouter = require('express').Router();
-const { Campus, Student } = require('../db/models'); // might need more models later
-
+const { Campus, Student } = require('../db/models');
 campusRouter.get('/', (req, res, next) =>  {
     Campus.findAll({
         order: [['id', 'ASC']]
