@@ -1,10 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
-//import rootReducer from './reducers';
 import loggingMiddleware from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 import axios from "axios";
 import { composeWithDevTools } from 'redux-devtools-extension';
-
 
 
 // INITIAL STATE
@@ -116,11 +114,11 @@ export function editStudent(student) {
 // // THUNK CREATORS
 
 export function fetchCampuses() {
-    return function thunk(dispatch) {
+    return function thunk(dispatch) { // dispatches action in order to change the state
         return axios.get('/api/campuses')
             .then(res => res.data)
             .then(campuses => {
-                const action = getCampuses(campuses);
+                const action = getCampuses(campuses); // this is the action creator function
                 dispatch(action);
             })
             .catch(error => console.log(error));
@@ -140,11 +138,11 @@ export function fetchStudents() {
 }
 
 export function fetchCampus(campusId) {
-    return function thunk(dispatch) { //dispatches action in order to change the state
+    return function thunk(dispatch) {
         return axios.get(`/api/campuses/${campusId}`)
             .then(res => res.data)
             .then(campus => {
-                const action = getSingleCampus(campus); //this is the action creator function  
+                const action = getSingleCampus(campus);
                 dispatch(action);
             })
             .catch(error => console.log(error));
@@ -225,7 +223,7 @@ export function updateCampus(campus, history) {
             })
             .catch(error => console.log(error));
     };
-}   
+}
 
 export function updateStudent(student, history) {
     return function thunk(dispatch) {
@@ -242,9 +240,7 @@ export function updateStudent(student, history) {
 
 //auxiliary functions
 
-// I need to find the object I want to edit (campus or student) in the array on state and then add all the previous campuses back to the array, the edited campus, and the following campuses 
-
-//and then add that array back to the state object (do this in reducer)
+// Used in reducer to find the index of a Campus or Student in an array by its id
 const indexOfObject = (id, array) => {
     for (let i = 0; i < array.length; i++) {
         if (array[i].id === id) {

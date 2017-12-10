@@ -19,9 +19,7 @@ const Campuses = (props) => {
                                         <h2 className="campus-name">{campus.name}</h2>
                                     </div>
                                 </Link>
-
                             </div>
-
                         );
                     })
 

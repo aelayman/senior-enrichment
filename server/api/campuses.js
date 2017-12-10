@@ -2,7 +2,8 @@
 
 const campusRouter = require('express').Router();
 const { Campus, Student } = require('../db/models');
-campusRouter.get('/', (req, res, next) =>  {
+
+campusRouter.get('/', (req, res, next) => {
     Campus.findAll({
         order: [['id', 'ASC']]
     })

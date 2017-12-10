@@ -1,7 +1,7 @@
 'use strict';
 
 const studentRouter = require('express').Router();
-const { Student, Campus } = require('../db/models'); // might need more models later
+const { Student, Campus } = require('../db/models');
 
 
 studentRouter.get('/', (req, res, next) => {
