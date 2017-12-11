@@ -81,7 +81,8 @@
     border: 1px solid #000;
   }
   .table {
-    border-collapse: collapse !important;
+    /* border-collapse: collapse !important; */
+
   }
   .table td,
   .table th {
@@ -286,7 +287,7 @@ textarea {
 }
 
 table {
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
 }
 
 caption {

@@ -17,9 +17,9 @@ class SingleCampus extends Component {
         const campus = this.props.campusData;
         return (
             <div>
-                <img src={campus.imageUrl} className="campus-image" />
-                <h2>{campus.name}</h2>
-                <p>{campus.description}</p>
+                <img id="campus-img" src={campus.imageUrl} />
+                <h2 id="campus-name">{campus.name}</h2>
+                <p id="campus-desc">{campus.description}</p>
             <ul>
             {
                 campus.students.map(student => {

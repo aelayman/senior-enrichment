@@ -43,7 +43,8 @@ a:hover {
     text-decoration: none;
     height: 1.5em;
     margin: 10px 1.5em 0 0;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
 }
 
 #nav-links li {
@@ -61,7 +62,7 @@ a:hover {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed rgb(55, 115, 168);;
+    border: 1px dashed rgb(55, 115, 168);
     padding: 30px;
 }
 
@@ -69,6 +70,8 @@ a:hover {
     text-align: center;
     color: rgb(55, 115, 168);
     margin-bottom: 30px;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -111,6 +114,7 @@ a:hover {
 }
 .campus-profile h2 {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .campus-profile:hover {
@@ -134,16 +138,49 @@ th {
     padding: 5px;
 }
 
+#campus-img {
+    width: 80%;
+    margin-top: 10px;
+}
+
+#campus-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#campus-desc {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
 #students-table th {
     border-bottom: 1px dashed grey;
     text-align: left;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    border-collapse:separate;
+    
+    
 }
 
 #students-table td {
     padding: 5px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn-primary {
     color: #fff;
     text-align: left;
+    border-color: #007bff;
+}
+
+button {
+    color: rgb(55, 115, 168);
+    cursor: pointer;
+}
+
+#delete-button {
+    color: rgb(55, 115, 168);
 }
