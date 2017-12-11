@@ -74,7 +74,7 @@ const SharedStudentForm = (props) => {
                 </select>
             </div>
             <div className="form-group">
-                <button type="submit" className="btn btn-default">{buttonTitle}</button>
+                <button type="submit">{buttonTitle}</button>
             </div>
         </form>
 

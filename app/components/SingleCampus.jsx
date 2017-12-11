@@ -20,22 +20,24 @@ class SingleCampus extends Component {
                 <img id="campus-img" src={campus.imageUrl} />
                 <h2 id="campus-name">{campus.name}</h2>
                 <p id="campus-desc">{campus.description}</p>
-            <ul>
-            {
-                campus.students.map(student => {
-                    return (
-                        <li key={student.id} >
-                        <Link to={`/students/${student.id}`} >
-                        {student.name}
-                        </Link>
-                        </li>
-                    );
-                })
-            }
-            </ul>
-                <button type="button">
-                <Link to={`/campuses/${campus.id}/edit`}>Edit</Link></button>
-            <button onClick={this.props.handleRemove} type="button">Delete Campus</button>
+                <ul>
+                    {
+                        campus.students.map(student => {
+                            return (
+                                <li key={student.id} >
+                                    <Link to={`/students/${student.id}`} >
+                                        {student.name}
+                                    </Link>
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
+                <div id="two-buttons">
+                    <button>
+                        <Link to={`/campuses/${campus.id}/edit`}>Edit</Link></button>
+                    <button onClick={this.props.handleRemove} >Delete Campus</button>
+                </div>
             </div>
         );
     }
@@ -43,7 +45,7 @@ class SingleCampus extends Component {
 
 const mapStateToProps = (state) => {
     return {
-    campusData: state.currentCampus
+        campusData: state.currentCampus
     };
 };
 

@@ -17,7 +17,13 @@ header {
     left: 4em;
     padding-left: 30px; 
     
-}   
+}
+
+#fleet-photo {
+    width: 75%;
+    margin: auto;
+    display: block;
+}
 
 a {
     text-decoration: none;
@@ -69,8 +75,8 @@ a:hover {
 .school-title {
     text-align: center;
     color: rgb(55, 115, 168);
-    margin-bottom: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     font-family: 'Montserrat', sans-serif;
 
 }
@@ -107,7 +113,7 @@ a:hover {
     transition: background-color 0.50s ease;
     box-sizing: border-box;
     display: block;
-    border: 8px solid white;
+    /* border: 8px solid white; */
     margin: 3%;
     border-radius: 5px;
     position: relative;
@@ -121,12 +127,19 @@ a:hover {
     background-color: #354451;
 }
 
+li {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
 th {
     color: black;
 }
 
 .campus-name {
     color: rgb(55, 115, 168);
+    font-size: 27px;
+    font-weight: bold;
 }
 
 #students-table {
@@ -140,7 +153,7 @@ th {
 
 #campus-img {
     width: 80%;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #campus-name {
@@ -153,6 +166,29 @@ th {
     font-family: 'Montserrat', sans-serif;
 }
 
+#student-page {
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#student-name {
+    font-weight: bold;
+    color: rgb(55, 115, 168);
+
+}
+
+form {
+    width: 80%;
+}
+
+textarea {
+    height: 100px;
+}
+
+table {
+    margin-top: 20px;
+    
+}
 
 #students-table th {
     border-bottom: 1px dashed grey;
@@ -170,17 +206,27 @@ th {
     font-family: 'Montserrat', sans-serif;
 }
 
+#add-student {
+    margin-left: 70%;
+}
+
+#two-buttons {
+    margin-bottom: 35px;
+}
+
 .btn-primary {
     color: #fff;
     text-align: left;
-    border-color: #007bff;
+    border-color: rgb(55, 115, 168);
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
 button {
     color: rgb(55, 115, 168);
     cursor: pointer;
-}
-
-#delete-button {
-    color: rgb(55, 115, 168);
+    border-color: rgb(55, 115, 168);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-top: 10px;
 }

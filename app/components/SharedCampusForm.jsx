@@ -48,7 +48,7 @@ const SharedCampusForm = (props) => {
                 />
             </div>
             <div className="form-group">
-                <button type="submit" className="btn btn-default">{submitText}</button>
+                <button>{submitText}</button>
             </div>
         </form>
 

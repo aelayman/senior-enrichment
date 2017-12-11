@@ -32,7 +32,7 @@ const Students = (props) => {
                     }
                 </tbody>
             </table>
-            <button type="button" className="btn btn-primary float-right">
+            <button type="button" id="add-student" className="btn btn-primary">
                 <Link to={"/students/new-student"} >
                     Add a new student
                 </Link>

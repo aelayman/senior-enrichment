@@ -15,8 +15,8 @@ class SingleStudent extends Component {
 
         const student = this.props.studentData;
         return (
-            <div>
-                <h2>{student.name}</h2>
+            <div id="student-page">
+                <h2 id="student-name">{student.name}</h2>
                 <ul>
                     <li>Email: {student.email}</li>
                     <li>GPA: {student.gpaFormat}</li>
